@@ -20,7 +20,7 @@ def def_MoS2(MoS2_thick, eps_background):
     # MoS2 monolayer from https://doi.org/10.1002/adpr.202000180
     # wavelength range: 0.38 - 0.66 μm
 
-    MoS2_freq_range = mp.FreqRange(min=um_scale/0.7, max=um_scale / 0.38)
+    # MoS2_freq_range = mp.FreqRange(min=um_scale/0.7, max=um_scale / 0.38)
 
     MoS2_eps_infty = 4.83291507293635
     MoS2_frq1 = 1.64797111642578
@@ -51,7 +51,7 @@ def def_MoS2(MoS2_thick, eps_background):
 
     MoS2 = mp.Medium(epsilon_diag=mp.Vector3(MoS2_eps_infty+(eps_background-1),eps_background,MoS2_eps_infty+(eps_background-1)), 
                      E_susceptibilities=MoS2_susc, 
-                     valid_freq_range=MoS2_freq_range,
+                    #  valid_freq_range=MoS2_freq_range,
                      )
     return MoS2
 
@@ -92,7 +92,7 @@ def flux_sim(freq, resolution, MoS2, MoS2_thick, source_component, ang, eps_back
         default_material = mp.Medium(epsilon = eps_background),
         # geometry=geometry,
         dimensions=dimensions,
-        force_complex_fields=True,
+        force_complex_fields=False,
         k_point=mp.Vector3(kx_lamda/2/np.pi,0,0),
         eps_averaging=False,
     )
@@ -140,7 +140,7 @@ def flux_sim(freq, resolution, MoS2, MoS2_thick, source_component, ang, eps_back
         default_material = mp.Medium(epsilon = eps_background),
         geometry=geometry,
         dimensions=dimensions,
-        force_complex_fields=True,
+        force_complex_fields=False,
         k_point=mp.Vector3(kx_lamda/2/np.pi,0,0),
         eps_averaging=False,
     )
